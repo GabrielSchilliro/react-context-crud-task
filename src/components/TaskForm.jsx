@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const TaskForm = () => {
     const { addTask, tasks } = useContext(GlobalContext);
-    const history = useNavigate();
+    const navigate = useNavigate();
     const params = useParams();
 
     const [task, setTask] = useState({
@@ -20,25 +20,25 @@ const TaskForm = () => {
     const handleSubmit = e => {
         e.preventDefault();
         addTask(task);
-        history('/');
+        navigate('/');
     }
 
     useEffect(() => {
-
-        const taskFound = tasks.find(task => task.id === params.id)
-        console.log(taskFound);
+        const taskFound = tasks.find((task) => task.id === params.id);
         if (taskFound) {
-            setTask(taskFound.id);
-        } else {
-            console.log('creating');
+            setTask({
+                id: taskFound.id,
+                title: taskFound.title,
+                description: taskFound.description,
+            });
         }
-    }, [params.id, tasks])
+    }, [params.id, tasks]);
 
     return (
         <div className='flex justify-center items-center h-3/4'>
             <form className='bg-gray-900 p-10' onSubmit={handleSubmit}>
                 <h2 className='mb-7 text-3x1'>
-                    {task.id ? 'Editing a task' : 'Creating a task'}
+                    {task.id ? "Update " : "Create "}A Task
                 </h2>
 
                 <div className='mb-5'>
