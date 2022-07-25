@@ -1,11 +1,14 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const TaskForm = () => {
-
-    const {addTask} = useContext(GlobalContext);
+    const { addTask, tasks } = useContext(GlobalContext);
+    const history = useNavigate();
+    const params = useParams();
 
     const [task, setTask] = useState({
+        id: '',
         title: '',
         description: ''
     });
@@ -15,15 +18,28 @@ const TaskForm = () => {
     };
 
     const handleSubmit = e => {
-        e.preventDefault()
+        e.preventDefault();
         addTask(task);
+        history('/');
     }
+
+    useEffect(() => {
+
+        const taskFound = tasks.find(task => task.id === params.id)
+        console.log(taskFound);
+        if (taskFound) {
+            setTask(taskFound.id);
+        } else {
+            console.log('creating');
+        }
+    }, [params.id, tasks])
 
     return (
         <div className='flex justify-center items-center h-3/4'>
             <form className='bg-gray-900 p-10' onSubmit={handleSubmit}>
-
-                <h2 className='mb-7 text-3x1'>A Task</h2>
+                <h2 className='mb-7 text-3x1'>
+                    {task.id ? 'Editing a task' : 'Creating a task'}
+                </h2>
 
                 <div className='mb-5'>
                     <input
@@ -39,6 +55,7 @@ const TaskForm = () => {
                     <textarea
                         name="description"
                         rows="2"
+
                         placeholder='Write a description'
                         onChange={handleChange}
                         className='py-3 px-4 focus:outline-none bg-gray-700 w-full'
@@ -46,7 +63,7 @@ const TaskForm = () => {
                 </div>
 
                 <button className='bg-green-600 w-full hover:bg-green-500 py-2 px-4 mt-5'>
-                    Create Task
+                    {task.id ? 'Edit' : 'Create'} Task
                 </button>
 
             </form>

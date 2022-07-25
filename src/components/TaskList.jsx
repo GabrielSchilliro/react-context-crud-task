@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
+import { Link } from 'react-router-dom';
 
 const TaskList = () => {
 
-    const { tasks } = useContext(GlobalContext);
+    const { tasks, delTask } = useContext(GlobalContext);
 
     return (
         <div className='flex justify-center'>
@@ -15,11 +16,14 @@ const TaskList = () => {
                             <h6>{task.id}</h6>
                         </div>
                         <div>
-                            <button>
+                            <Link
+                                to={`/edit/${task.id}`}
+                                className='bg-gray-600 hover:bg-gray500 py-2 px-4 mr-2'>
                                 Edit
-                            </button>
-                            <button>
-                                Delete
+                            </Link>
+                            <button className='bg-red-600 hover:bg-red-500 py-2 px-4 mr-2'
+                                onClick={() => delTask(task.id)}
+                            >Delete
                             </button>
                         </div>
                     </div>
