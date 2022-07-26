@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-context-crud-task/static/css/main.47cc53c5.css",
+    "main.js": "/react-context-crud-task/static/js/main.db30052b.js",
+    "index.html": "/react-context-crud-task/index.html",
+    "main.47cc53c5.css.map": "/react-context-crud-task/static/css/main.47cc53c5.css.map",
+    "main.db30052b.js.map": "/react-context-crud-task/static/js/main.db30052b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.47cc53c5.css",
+    "static/js/main.db30052b.js"
+  ]
+}
