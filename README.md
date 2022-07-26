@@ -9,4 +9,4 @@ React Router v6 permite la navegación
 ## Totalmente responsive
 Estilos hechos con Tailwind CSS
 
-## Podes verlo y probarlo acá: https://gabrielschilliro.github.io/
+## Podés verlo y probarlo acá: https://gabrielschilliro.github.io/
